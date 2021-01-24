@@ -24,8 +24,6 @@ class Notmuch < Formula
   depends_on "xapian"
   depends_on "zlib"
 
-  skip_clean :la
-
   def install
     args = %W[
       --prefix=#{prefix}
@@ -36,6 +34,7 @@ class Notmuch < Formula
       --zshcompletiondir=#{zsh_completion}
     ]
 
+    ENV.prepend_path "PATH", Formula["ruby@3.0"].opt_bin
     ENV.append_path "PYTHONPATH", Formula["sphinx-doc"].opt_libexec/"lib/python3.9/site-packages"
 
     system "./configure", *args
@@ -51,13 +50,10 @@ class Notmuch < Formula
       system Formula["python@3.9"].opt_bin/"python3", *Language::Python.setup_install_args(prefix)
     end
 
-    ENV.prepend_path "PATH", Formula["ruby@3.0"].opt_bin
     system "make", "ruby-bindings"
-
-    # mkdir_p Formula["ruby@3.0"].opt_lib/"vendor_ruby/3.0.0/x86_64-darwin18"
-    # cd "bindings/ruby" do
-    #   system "make", "install"
-    # end
+    cd "bindings/ruby" do
+      system "make", "install"
+    end
   end
 
   test do
