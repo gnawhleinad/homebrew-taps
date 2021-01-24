@@ -51,6 +51,8 @@ class Notmuch < Formula
 
     ENV.prepend_path "PATH", Formula["ruby@3.0"].opt_bin
     system "make", "ruby-bindings"
+
+    mkdir_p Formula["ruby@3.0"].opt_lib/"vendor_ruby/3.0.0/x86_64-darwin18"
     cd "bindings/ruby" do
       system "make", "install"
     end
