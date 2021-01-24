@@ -53,6 +53,9 @@ class Notmuch < Formula
     inreplace "bindings/Makefile.local", "--vendor", ""
     system "make", "ruby-bindings"
     cd "bindings/ruby" do
+      # fuck it. compile it myself.
+      #
+      # dear human, this doesn't work.
       system "make", "install"
     end
   end
