@@ -24,6 +24,8 @@ class Notmuch < Formula
   depends_on "xapian"
   depends_on "zlib"
 
+  skip_clean :la
+
   def install
     args = %W[
       --prefix=#{prefix}
@@ -53,9 +55,9 @@ class Notmuch < Formula
     system "make", "ruby-bindings"
 
     # mkdir_p Formula["ruby@3.0"].opt_lib/"vendor_ruby/3.0.0/x86_64-darwin18"
-    cd "bindings/ruby" do
-      system "make", "install"
-    end
+    # cd "bindings/ruby" do
+    #   system "make", "install"
+    # end
   end
 
   test do
