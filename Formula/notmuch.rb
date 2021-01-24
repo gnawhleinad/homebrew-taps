@@ -50,7 +50,7 @@ class Notmuch < Formula
       system Formula["python@3.9"].opt_bin/"python3", *Language::Python.setup_install_args(prefix)
     end
 
-    inreplace "bindings/Makefile.local", "--vendor ", ""
+    inreplace "bindings/Makefile.local", "--vendor", ""
     system "make", "ruby-bindings"
     cd "bindings/ruby" do
       system "make", "install"
